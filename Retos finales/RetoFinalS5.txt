@@ -1,0 +1,175 @@
+Obtén los datos de contacto de cada compañía.
+{
+ project: {
+  _id: 0,
+  name: 1,
+  homepage_url: 1,
+  email_address: 1,
+  phone_number: 1
+ }
+}
+
+
+Obtén el identificador de la clase de cada calificación.
+{
+ project: {
+  _id: 0,
+  scores: 1,
+  class_id: 1
+ }
+}
+
+
+Obtén el nombre de todas las compañias fundadas en octubre.
+{
+ filter: {
+  founded_month: 10
+ },
+ project: {
+  name: 1,
+  _id: 0
+ }
+}
+
+
+Obtén el nombre de todas las compañías fundadas en 2008.
+{
+ filter: {
+  founded_year: 2008
+ },
+ project: {
+  name: 1,
+  _id: 0
+ }
+}
+
+
+Obtén todos los post del autor machine.
+{
+ filter: {
+  author: 'machine'
+ }
+}
+
+
+Obtén todas las calificaciones provenientes de los grupos 357, 57 y 465.
+{
+ filter: {
+  $or: [
+   {
+    class_id: 357
+   },
+   {
+    class_id: 57
+   },
+   {
+    class_id: 465
+   }
+  ]
+ }
+}
+
+
+Obtén todas las compañías fundadas en octubre del 2008.
+{
+ filter: {
+  $and: [
+   {
+    founded_year: 2008
+   },
+   {
+    founded_month: 10
+   }
+  ]
+ }
+}
+
+
+
+Obtén todas las compañias con más de 50 empleados.
+{
+ filter: {
+  number_of_employees: {
+   $gt: 50
+  }
+ },
+ sort: {
+  number_of_employees: 1
+ }
+}
+
+
+Obtén las rutas con un número de paradas entre 1 y 5.
+{
+ filter: {
+  $and: [
+   {
+    stops: {
+     $gte: 1
+    }
+   },
+   {
+    stops: {
+     $lte: 5
+    }
+   }
+  ]
+ }
+}
+
+
+Obtén la empresa con el menor número de empleados.
+filter={
+    '$and': [
+        {
+            'number_of_employees': {
+                '$ne': 0
+            }
+        }, {
+            'number_of_employees': {
+                '$ne': None
+            }
+        }
+    ]
+}
+sort=list({
+    'number_of_employees': 1
+}.items())
+limit=1
+
+
+Obtén la empresa con el mayor número de empleados.
+{
+ project: {
+  name: 1,
+  number_of_employees: 1,
+  _id: 0
+ },
+ sort: {
+  number_of_employees: -1
+ },
+ limit: 1
+}
+
+
+Obtén el viaje con mayor duración.
+{
+ project: {
+  'start station name': 1,
+  'end station name': 1,
+  _id: 0
+ },
+ sort: {
+  tripduration: -1
+ },
+ limit: 1
+}
+
+
+Obtén el viaje con menor duración.
+{
+ sort: {
+  tripduration: 1
+ },
+ limit: 1
+}

@@ -1,0 +1,43 @@
+EJERCICIO:
+Continuaremos trabajando con la base de datos de películas y sus comentarios.
+
+El ejercicio consiste en obtener, por país, el número de películas que hay de cada genero. Un ejemplo de salida, en formato de tabla,sería:
+
+pais	genero	peliculas
+USA	Short	10
+USA	Drama	20
+...	...	...
+
+AGGREGATION
+[{$unwind: {
+ path: '$genres'
+}}, {$unwind: {
+ path: '$countries'
+}}, {$group: {
+ _id: {
+  country: '$countries',
+  genre: '$genres'
+ },
+ total: {
+  $sum: 1
+ }
+}}, {$addFields: {
+ Pais: '$_id.country'
+}}, {$addFields: {
+ Genero: '$_id.genre'
+}}, {$match: {
+ Pais: {
+  $exists: true
+ },
+ Genero: {
+  $exists: true
+ }
+}}, {$project: {
+ _id: 0,
+ Pais: 1,
+ Genero: 1,
+ total: 1
+}}, {$sort: {
+ total: -1
+}}]
+
